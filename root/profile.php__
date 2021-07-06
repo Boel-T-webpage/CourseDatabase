@@ -1,0 +1,103 @@
+
+<?php
+require_once "includes/dbh.inc.php";
+  include_once 'header.php';
+?>
+
+
+<?php
+
+$servername = "localhost";
+$dBUsername = "root";
+$dBPassword = "";
+//$dBName = "phpproject01";
+$dBName = "test";
+
+$conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
+
+if (!$conn) {
+	die("Connection failed: ".mysqli_connect_error());
+}
+
+
+//include 'includes/functions.inc.php';
+
+$sqls = 'SELECT usersUniTags, usersDepTags,
+          FROM users
+          WHERE usersUid = $_SESSION["useruid"];';
+
+$resultss = $mysqli->query($sqls);
+echo "her er resultat::  " . $resultss ;
+
+?>
+
+<section class="profile-intro">
+  <h1>Your profile</h1>
+  <p>Here you can se what courses you have planned and edit your courses and  metadata.</p>
+</section>
+
+<section class="profile-subs">
+  <!--<h1>Your profile</h1> -->
+
+  <p>You are logged in<br> as username <?php echo $_SESSION["useruid"]   ; ?> <br> with the following meta data usersUniTags og usersDepTags.</p>
+  <p>Associated university: <?php echo $_SESSION["usersUniTags"]   ; ?>   </p>
+  <p>Associated department: <?php echo $_SESSION["usersDepTags"]   ; ?>   </p>
+
+</section>
+
+
+
+<section class="signup-form">
+  <h2>Ajust associated university and institute settings</h2>
+  <div class="signup-form-form">
+    <form action="includes/ajust.inc.php" method="post">
+      <input type="text" name="newUunitag" placeholder="University tag, e.g. DTU">
+      <input type="text" name="newUdeptag" placeholder="what department... e.g. physics">
+      <button type="submit" name="submit">Select tags</button>
+    </form>
+  </div>
+</section>
+
+
+
+<?php
+  include_once 'footer.php';
+?>
+
+<?php
+/*
+
+<section class="profile-intro">
+  <h1>Here is your profile page</h1>
+  <p>Here you can edit the info about your user and assign or edit uni and department -tags!</p>
+</section>
+
+<section class="profile-categories">
+  <h2>Some Basic Categories</h2>
+  <div class="profile-categories-list">
+    <div>
+      <h3>Fun Stuff</h3>
+    </div>
+    <div>
+      <h3>Serious Stuff</h3>
+    </div>
+    <div>
+      <h3>Set uni  dep tags</h3>
+    </div>
+    <div>
+      <h3>Boring Stuff</h3>
+    </div>
+  </div>
+</section>
+
+
+
+<form action="includes/signup.inc.php" method="post">
+  <input type="text" name="fullname" placeholder="Full name...">
+  <button type="submit" name="submit">Update</button>
+</form>
+
+*/
+ ?>
+
+ <a href="index.php">Return to main page </a >
